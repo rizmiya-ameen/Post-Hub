@@ -1,0 +1,9 @@
+npx create-next-app@latest
+
+npm i next-auth
+
+npm i -D prisma
+
+npm i @prisma/client
+
+ npx prisma init

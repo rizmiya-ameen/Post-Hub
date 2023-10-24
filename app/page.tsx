@@ -1,25 +1,46 @@
 import CategoryList from "@/components/CategoryList"
 import Post from "@/components/Post"
-import { postsData } from "@/data"
+import { TPost } from "./types"
 
-export default function Home() {
+const getPosts = async (): Promise<TPost[] | null> => {
+  try {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/posts`, {
+      cache: 'no-store'
+    })
+    
+    if (res.ok) {
+      const posts = await res.json()
+      return posts;
+    }
+  } catch (error) {
+    console.log(error)
+  }
+
+  return null;
+}
+
+export default async function Home() {
+
+  const posts = await getPosts();
   
   return (
+
+    
     <div>
       <CategoryList />
 
-      {postsData && postsData.length > 0 ? 
-        (postsData.map(item => 
+      {posts && posts.length > 0 ? 
+        (posts.map(item => 
           <Post 
             key={item.id}
             id={item.id}
             title={item.title}
-            author={item.author}
-            authorEmail="test@email.com"
-            datepublished={item.datepublished}
-            category={item.category}
-            links={item.links}
-            thumbnail={item.thumbnail}
+            author={item.author.name}
+            authorEmail={item.authorEmail}
+            datepublished={item.createdAt}
+            category={item.catName}
+            links={item.links || []}
+            thumbnail={item.imageUrl}
             content={item.content}
           />
         ))  

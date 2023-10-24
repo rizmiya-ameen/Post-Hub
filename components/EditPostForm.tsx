@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { TCategory } from "@/app/types"
+import { TCategory, TPost } from "@/app/types"
 import { useRouter } from 'next/navigation'
 
-const CreatePostForm = () => {
+const EditPostForm = ({post} : {post : TPost}) => {
 
   const router = useRouter()
 
@@ -165,4 +165,4 @@ const CreatePostForm = () => {
   )
 }
 
-export default CreatePostForm
+export default EditPostForm

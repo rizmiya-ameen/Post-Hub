@@ -1,6 +1,8 @@
 import Image from "next/image"
 import Link from "next/link"
 import DeleteButton from "./DeleteButton"
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 interface PostProps {
   id: string,
@@ -14,14 +16,35 @@ interface PostProps {
   content: String
 }
 
-const Post = ({id, title, author, authorEmail, datepublished, category, links, thumbnail, content}: PostProps) => {
+const Post = async ({id, title, author, authorEmail, datepublished, category, links, thumbnail, content}: PostProps) => {
 
-  const isEditable = true
+  const session = await getServerSession(authOptions);
+
+  const isEditable = session && session?.user?.email === authorEmail
+
+  const dateObject = new Date(datepublished)
+  const options: Intl.DateTimeFormatOptions = {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  }
+
+  const formattedDate = dateObject.toLocaleDateString("en-US", options)
 
   return (
     <div className="my-4 border-b border-b-300 py-8">
       <div className="mb-4">
-        Posted by: <span className="font-bold">{author}</span> on {datepublished}
+        {author ? (
+          <>
+            Posted by: <span className="font-bold">{author}</span> on {formattedDate}
+          </>
+        ) : (
+          <>
+            Posted on: {formattedDate}
+          </>
+        ) 
+          
+        }
       </div>
 
       <div className="w-full h-72 relative">
@@ -73,7 +96,7 @@ const Post = ({id, title, author, authorEmail, datepublished, category, links, t
       {isEditable &&
         <div className="flex gap-3 font-bold py-2 px-4 rounded-md bg-slate-100 w-fit">
           <Link href={`/edit-post/${id}`}>Edit</Link>
-          <DeleteButton />
+          <DeleteButton id={id}/>
         </div>
       }
 

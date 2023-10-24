@@ -7,3 +7,9 @@ npm i -D prisma
 npm i @prisma/client
 
  npx prisma init
+
+ to add prisma adapter to next-auth
+ npm i @auth/prisma-adapter
+
+
+ npx prisma studio

@@ -8,11 +8,12 @@ export async function GET (req: Request, {params} : {params : { catName : string
     const catName = params.catName;
     const posts = await prisma.category.findUnique({where: {catName},
       include: {
-        posts: {include : {author: true}}}
+        posts: {include : {author: true}, orderBy: {createdAt: 'desc'}}}
     })
+
     return NextResponse.json(posts)
   } catch (error) {
     console.log(error)
-    return NextResponse.json({message: "error" })
+    return NextResponse.json({message: "Could not fetch post" })
   }
 }

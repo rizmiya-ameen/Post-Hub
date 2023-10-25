@@ -13,3 +13,7 @@ npm i @prisma/client
 
 
  npx prisma studio
+
+ npm i next-cloudinary cloudinary
+
+ cloudinary -> settings -> upload

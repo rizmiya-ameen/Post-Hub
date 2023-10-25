@@ -24,7 +24,7 @@ const getCategories = async (): Promise<TCategory[] | null> => {
       {categories && categories.map(item => (
         <div key={item.id}>
         <Link 
-          href={`/category/${item.catName}`}
+          href={`/categories/${item.catName}`}
           className="px-4 py-1 rounded-md bg-slate-700 text-white"
         >
           {item.catName}

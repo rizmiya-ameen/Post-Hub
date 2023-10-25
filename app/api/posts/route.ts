@@ -14,7 +14,7 @@ export async function POST(req: Request) {
       return NextResponse.json({error: "Not authenticated"}, {status: 401})
    }
 
-   const {title, content, links, imageUrl, publicId, catName} = await req.json();
+   const {title, content, links, imageUrl, publicId, selectedCategory} = await req.json();
 
    const authorEmail= session?.user?.email as string
 
@@ -25,7 +25,7 @@ export async function POST(req: Request) {
 
    try {
       const newPost = await prisma.post.create({ data: {
-         title, content, links, imageUrl, publicId, catName, authorEmail,
+         title, content, links, imageUrl, publicId, catName: selectedCategory, authorEmail,
       }})
 
       console.log("post created")

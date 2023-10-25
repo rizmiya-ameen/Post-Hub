@@ -66,7 +66,7 @@ const Post = async ({id, title, author, authorEmail, datepublished, category, li
 
       {category && <Link 
       className="bg-slate-700 w-fit text-white px-4 py-0.5 text-sm font-bold rounded-md mt-4 block"
-      href={`/category/${category}`}>{category}</Link>}
+      href={`/categories/${category}`}>{category}</Link>}
 
       <h2 className="text-xl font-bold my-4">{title}</h2>
       <p className="leading-loose">{content}</p>

@@ -3,7 +3,7 @@ import prisma from "@/lib/prismadb";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../auth/[...nextauth]/route";
 
-export async function GET (req: Request, {params} : {params : {id: string}}) {
+export async function GET (req: Request, {params}: {params: {id: string}}) {
   try {
     const id = params.id;
     //console.log(id)
@@ -27,7 +27,7 @@ export async function PUT(req: Request, {params} : {params : { id: string}}) {
       return NextResponse.json({error: "Not authenticated"}, {status: 401})
    }
 
-  const {title, content, links, imageUrl, publicId, catName} = await req.json();
+  const {title, content, links, imageUrl, publicId, selectedCategory} = await req.json();
   const id = params.id
 
   try {
@@ -35,7 +35,7 @@ export async function PUT(req: Request, {params} : {params : { id: string}}) {
     const post = await prisma.post.update({
       where: { id },
       data: {
-        title, content, links, imageUrl, publicId, catName
+        title, content, links, imageUrl, publicId, catName: selectedCategory,
       }
     })
     return NextResponse.json(post)

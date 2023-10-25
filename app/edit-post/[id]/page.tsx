@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import { redirect } from "next/navigation"
  
-const getPost = async (id: string): Promise<TPost[] | null> => {
+const getPost = async (id: string): Promise<TPost | null> => {
   try {
     const res = await fetch(`${process.env.NEXTAUTH_URL}/api/posts/${id}`, {
       cache: "no-store"
@@ -22,7 +22,7 @@ const getPost = async (id: string): Promise<TPost[] | null> => {
 
 const EditPost = async ({params} : {params: {id : string}}) => {
 
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession(authOptions);
 
   if(!session) {
     redirect('/sign-in')

@@ -4,6 +4,7 @@ import './globals.css'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 import { NextAuthProvider } from '@/components/Providers'
+import { Toaster } from 'react-hot-toast'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,12 +22,15 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} lg:max-w-[900px] lg:px-16 px-8 mx-auto py-8 shadow-xl min-h-screen flex flex-col`}> 
         <NextAuthProvider>
-          <NavBar />        
-            <div className='flex-auto'>
-              {children}
-            </div>
-          <Footer />
-
+          <div>
+            <NavBar />        
+              <div className='flex-auto'>
+                {children}
+              </div>
+            <Footer />
+          </div>
+          
+          <Toaster />
         </NextAuthProvider>
         
       </body>

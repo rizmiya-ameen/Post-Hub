@@ -6,6 +6,7 @@ import { TCategory } from "@/app/types"
 import { useRouter } from 'next/navigation'
 import { CldUploadButton, CldUploadWidgetResults } from 'next-cloudinary';
 import Image from "next/image"
+import toast from "react-hot-toast";
  
 
 
@@ -21,7 +22,6 @@ const CreatePostForm = () => {
   const [ selectedCategory, setSelectedCategory ] = useState("")
   const [ imageUrl, setImageUrl ] = useState("")
   const [ publicId, setPublicId ] = useState("")
-  const [ error, setError ] = useState("")
 
 
   
@@ -93,7 +93,8 @@ const CreatePostForm = () => {
     //to prevent the default behavior of reloading the page
 
     if (!title || !content) {
-      setError("Title and content are required")
+      const errorMessage = "Title and content are required";
+      toast.error(errorMessage);
       return;
     }
 
@@ -114,7 +115,10 @@ const CreatePostForm = () => {
       })
 
       if (res.ok) {
+        toast.success("Post created successfully!")
         router.push('/dashboard')
+      } else {
+        toast.error("Something went wrong!")
       }
 
     } catch (error) {
@@ -233,7 +237,6 @@ const CreatePostForm = () => {
 
         <button type="submit" className="px-4 py-2 bg-slate-700 text-white rounded-md">Create Post</button>
 
-        {error && <div className="p-2 text-red-500 font-bold">{error}</div>}
       </form>
     </div>
   )

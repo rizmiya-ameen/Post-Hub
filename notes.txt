@@ -17,3 +17,5 @@ npm i @prisma/client
  npm i next-cloudinary cloudinary
 
  cloudinary -> settings -> upload
+
+ npm i react-hot-toast

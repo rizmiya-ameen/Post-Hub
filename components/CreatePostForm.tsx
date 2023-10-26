@@ -117,6 +117,7 @@ const CreatePostForm = () => {
       if (res.ok) {
         toast.success("Post created successfully!")
         router.push('/dashboard')
+        router.refresh();
       } else {
         toast.error("Something went wrong!")
       }

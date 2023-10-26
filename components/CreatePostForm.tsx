@@ -4,7 +4,8 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { TCategory } from "@/app/types"
 import { useRouter } from 'next/navigation'
-import { CldUploadButton } from 'next-cloudinary';
+import { CldUploadButton, CldUploadWidgetResults } from 'next-cloudinary';
+import Image from "next/image"
  
 
 
@@ -19,7 +20,7 @@ const CreatePostForm = () => {
   const [ categories, setCategories ] = useState<TCategory[]>([])
   const [ selectedCategory, setSelectedCategory ] = useState("")
   const [ imageUrl, setImageUrl ] = useState("")
-  const [ publicID, setPublicID ] = useState("")
+  const [ publicId, setPublicId ] = useState("")
   const [ error, setError ] = useState("")
 
 
@@ -36,8 +37,18 @@ const CreatePostForm = () => {
   }, []) 
 
 
-  const handleImageUpload = () => {
-    
+  const handleImageUpload = (result: CldUploadWidgetResults) => {
+    console.log('result: ', result)
+    const info = result.info as object;
+
+    if ("secure_url" in info && "public_id" in info) {
+      const url = info.secure_url as string;
+      const public_id = info.public_id as string;
+      setImageUrl(url);
+      setPublicId(public_id);
+      //console.log("url: ", url);
+      //console.log("public_id: ", public_id);
+    }
   }
 
 
@@ -55,6 +66,27 @@ const CreatePostForm = () => {
   }
 
   //console.log(links)
+
+  const removeImage = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch('api/removeImage', {
+        method: "POST",
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify({ publicId})
+      })
+  
+      if (res.ok) {
+        setImageUrl("");
+        setPublicId("");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -77,7 +109,7 @@ const CreatePostForm = () => {
           links, 
           selectedCategory, 
           imageUrl, 
-          publicID,
+          publicId,
         }),
       })
 
@@ -158,8 +190,8 @@ const CreatePostForm = () => {
 
 
         <CldUploadButton 
-          uploadPreset="yi5vtsbz"
-          className="h-48 border-2 mt-4 border-dotted grid place-items-center bg-slate-100 rounded-md"
+          uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
+          className={`h-48 border-2 mt-4 border-dotted grid place-items-center bg-slate-100 rounded-md relative ${imageUrl && "pointer-events-none"}`}
           onUpload={handleImageUpload}
         >
           <div>
@@ -168,7 +200,26 @@ const CreatePostForm = () => {
             </svg>
 
           </div>
+
+          {imageUrl && 
+            <Image 
+              src={imageUrl}
+              fill
+              alt={title}
+              className="absolute object-cover inset-0"
+              //inset-0 it spans to the full width and height of the container
+            />
+          }
         </CldUploadButton>
+
+        {publicId && (
+          <button 
+          onClick={removeImage}
+            className="py-2 px-4 rounded-md w-fit bg-red-600 text-white mb-4 font-bold"
+          >
+            Remove Image
+          </button>
+        )}
 
         <select 
           className="p-3 rounded-md border "
@@ -189,3 +240,34 @@ const CreatePostForm = () => {
 }
 
 export default CreatePostForm
+
+/*
+{
+  "event": "success",
+  "info": {
+      "id": "uw-file3",
+      "batchId": "uw-batch2",
+      "asset_id": "499e56360f6ff1635c35f839ad52e2f6",
+      "public_id": "post_images/lrkqx6buzqjupmpoicmu",
+      "version": 1698222708,
+      "version_id": "e20f2ac18cdb542971d6fa6c09e423a7",
+      "signature": "eeeafdcb1ef0276fd5fbb78c17ecd551f0610e89",
+      "width": 960,
+      "height": 640,
+      "format": "jpg",
+      "resource_type": "image",
+      "created_at": "2023-10-25T08:31:48Z",
+      "tags": [],
+      "bytes": 42400,
+      "type": "upload",
+      "etag": "b4b4c106eacf7f4dfa51565594331573",
+      "placeholder": false,
+      "url": "http://res.cloudinary.com/ddyq2sjyr/image/upload/v1698222708/post_images/lrkqx6buzqjupmpoicmu.jpg",
+      "secure_url": "https://res.cloudinary.com/ddyq2sjyr/image/upload/v1698222708/post_images/lrkqx6buzqjupmpoicmu.jpg",
+      "folder": "post_images",
+      "access_mode": "public",
+      "original_filename": "photo-1682686578289-cf9c8c472c9b",
+      "path": "v1698222708/post_images/lrkqx6buzqjupmpoicmu.jpg",
+      "thumbnail_url": "https://res.cloudinary.com/ddyq2sjyr/image/upload/c_limit,h_60,w_90/v1698222708/post_images/lrkqx6buzqjupmpoicmu.jpg"
+  }
+}*/

@@ -2,6 +2,8 @@
 
 POSTHUB is a CRUD application developed using Next.js 13.5, TypeScript, and Tailwind CSS. It provides a platform for tech enthusiasts to share their insights, experiences, and tips. The application is equipped with a variety of features to enhance the user experience and streamline the process of posting and managing tech-related content.
 
+The application is live and can be accessed [here](https://post-hub-rizmiya.vercel.app/).
+
 ## Features
 
 - **User Authentication:** Secure user accounts are managed using NextAuth, ensuring a smooth and reliable login experience.
@@ -39,16 +41,14 @@ POSTHUB is a CRUD application developed using Next.js 13.5, TypeScript, and Tail
 ![Dashboard](/public/dashboard.png)
 
 ### Create Post
-![Create Post](<create-post-image-url>)
+![Create Post](/public/1.png)
 
 ### Post Homepage
 ![Post Homepage](<post-homepage-image-url>)
 
 <!-- Add more screenshots as needed -->
 
-## Deployed Site
 
-The application is live and can be accessed [here](https://post-hub-rizmiya.vercel.app/).
 
 ## Contributing
 

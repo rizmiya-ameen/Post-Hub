@@ -36,7 +36,7 @@ POSTHUB is a CRUD application developed using Next.js 13.5, TypeScript, and Tail
 ## Screenshots
 
 ### Dashboard
-![Dashboard](/dashboard.png)
+![Dashboard](/public/dashboard.png)
 
 ### Create Post
 ![Create Post](<create-post-image-url>)

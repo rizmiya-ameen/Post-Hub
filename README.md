@@ -14,7 +14,7 @@ The application is live and can be accessed [here](https://post-hub-rizmiya.verc
 ![Dashboard](/public/dashboard.png)
 
 ### Create Post
-![Create Post](/public/createpost.png.png)
+![Create Post](/public/createpost.png)
 
 
 

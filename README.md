@@ -56,4 +56,4 @@ We welcome contributions! If you have enhancements or bug fixes, please open an 
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](https://github.com/rizmiya-ameen/Post-Hub/new/main).

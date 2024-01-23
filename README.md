@@ -1,6 +1,6 @@
-# POSTHUB - Tech Tales Unleashed
+# POST-HUB - Tech Tales Unleashed
 
-POSTHUB is a CRUD application developed using Next.js 13.5, TypeScript, and Tailwind CSS. It provides a platform for tech enthusiasts to share their insights, experiences, and tips. The application is equipped with a variety of features to enhance the user experience and streamline the process of posting and managing tech-related content.
+POST-HUB is a CRUD application developed using Next.js 13.5, TypeScript, and Tailwind CSS. It provides a platform for tech enthusiasts to share their insights, experiences, and tips. The application is equipped with a variety of features to enhance the user experience and streamline the process of posting and managing tech-related content.
 
 The application is live and can be accessed [here](https://post-hub-rizmiya.vercel.app/).
 

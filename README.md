@@ -38,10 +38,10 @@ The application is live and can be accessed [here](https://post-hub-rizmiya.verc
 ## Screenshots
 
 ### Dashboard
-![Dashboard](/public/2.png)
+![Dashboard](/public/1.png)
 
 ### Create Post
-![Create Post](/public/1.png)
+![Create Post](/public/2.png)
 
 ### Post Homepage
 ![Post Homepage](<post-homepage-image-url>)

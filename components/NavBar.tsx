@@ -4,6 +4,9 @@ import Link from "next/link"
 import { useSession, signOut } from "next-auth/react"
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
+import { Redressed } from "next/font/google";
+
+const redressed = Redressed({ subsets: ["latin"], weight: ["400"]})
 
 const NavBar = () => {
 
@@ -35,7 +38,8 @@ const NavBar = () => {
   return (
     <nav className="flex justify-between pb-4 border-b mb-4 relative">
       <div>
-        <Link href="/">Posting Site</Link>
+        <Link href="/" className={`${redressed.className} font-bold text-4xl bg-gradient-to-r from-cyan-500 to-indigo-500 text-transparent bg-clip-text`}>PostHub</Link>
+        <p className="font-light text-[11px] text-slate-600">Tech Tales Unleashed</p>
       </div>
 
       {

@@ -25,6 +25,7 @@ export default function EditPostForm({ post }: { post: TPost }) {
     const fetchAllCategories = async () => {
       const res = await fetch("/api/categories");
       //since it is a client component, can type the relative path
+      if (!res.ok) return;
       const catNames = await res.json();
       setCategories(catNames);
     };
@@ -131,6 +132,8 @@ export default function EditPostForm({ post }: { post: TPost }) {
         toast.success("Post edited successfully");
         router.push("/dashboard");
         router.refresh();
+      } else {
+        toast.error("Something went wrong");
       }
     } catch (error) {
       toast.error("Something went wrong");

@@ -27,8 +27,9 @@ const CreatePostForm = () => {
   
   useEffect(() => {
     const fetchAllCategories = async () => {
-      const res = await fetch('api/categories')
+      const res = await fetch('/api/categories')
       //since it is a client component, can type the relative path
+      if (!res.ok) return;
       const catNames = await res.json()
       setCategories(catNames)
     }
@@ -71,7 +72,7 @@ const CreatePostForm = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch('api/removeImage', {
+      const res = await fetch('/api/removeImage', {
         method: "POST",
         headers: { "Content-Type": "application/json"},
         body: JSON.stringify({ publicId})
@@ -99,7 +100,7 @@ const CreatePostForm = () => {
     }
 
     try {
-      const res = await fetch('api/posts', {
+      const res = await fetch('/api/posts', {
         method: "POST",
         headers: {
           "Content-type": "application/json",

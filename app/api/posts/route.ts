@@ -31,7 +31,8 @@ export async function POST(req: Request) {
       console.log("post created")
       return NextResponse.json(newPost)
    } catch (error) {
-      return NextResponse.json("couldnt create post")
+      console.log(error)
+      return NextResponse.json({message: "couldnt create post"}, {status: 500})
    }
 }
 

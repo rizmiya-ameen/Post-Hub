@@ -33,10 +33,14 @@ const DeleteButton = ({id} : {id : string}) => {
           console.log("Post Deleted");
           const post = await res.json();
           const { publicId } = post;
-          await deleteImage(publicId)
+          if (publicId) {
+            await deleteImage(publicId)
+          }
 
           toast.success("Post deleted successfully")
           router.refresh();
+         } else {
+          toast.error("Something went wrong!")
          }
       } catch (error) {
         toast.error("Something went wrong!")

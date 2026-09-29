@@ -71,7 +71,7 @@ const NavBar = () => {
 
             <div className="flex gap-2 items-center">
               <Link 
-                href="create-post"
+                href="/create-post"
                 className="hidden md:flex gap-2 items-center mr-6"
               >
                 <span>

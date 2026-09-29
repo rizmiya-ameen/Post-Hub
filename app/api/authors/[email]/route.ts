@@ -13,6 +13,6 @@ export async function GET (req: Request, {params} : {params : {
     return NextResponse.json(posts)
   } catch (error) {
     console.log(error)
-    return NextResponse.json({message: "Couldnt fetch the post"})
+    return NextResponse.json({message: "Couldnt fetch the post"}, {status: 500})
   }
 }
